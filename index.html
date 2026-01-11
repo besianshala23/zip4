@@ -193,15 +193,16 @@
     .stepText{margin:0;color:var(--muted);font-size:13px;line-height:1.45}
 
     /* Highlights */
-    .highlight{
-      margin-top:18px;
-      border-top:1px solid rgba(0,0,0,.06);
-      padding-top:18px;
-      display:grid;
-      grid-template-columns: 1.05fr .95fr;
-      gap:18px;
-      align-items:start;
-    }
+.highlight{
+  margin-top:18px;
+  border-top:1px solid rgba(0,0,0,.06);
+  padding-top:18px;
+
+  display:grid;
+  grid-template-columns: 1fr 1fr;   /* simmetria reale */
+  gap:24px;                         /* respiro più coerente */
+  align-items:start;
+}
     .miniList{list-style:none;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:10px}
     .chip{
       border:1px solid var(--line);

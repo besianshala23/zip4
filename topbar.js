@@ -3,7 +3,7 @@
     <header class="tb">
       <div class="tb-wrap tb-inner">
         <div class="tb-side tb-left">
-          <a class="tb-brand" href="./index.html" aria-label="ZIP 4 Home">
+          <a class="tb-brand" href="./index.html" data-nav="home" aria-label="ZIP 4 Home">
             <img class="tb-logo" src="Logo.png" alt="ZIP 4 logo" />
             <span class="tb-brandText">ZIP 4</span>
           </a>
@@ -11,7 +11,7 @@
 
         <nav class="tb-center" aria-label="Navigation">
           <a class="tb-link tb-disabled" href="./changelog.html" aria-disabled="true">Changelog</a>
-          <a class="tb-link" href="./index.html#about">About</a>
+          <a class="tb-link" href="./index.html#about" data-nav="about">About</a>
           <a class="tb-link" href="./contact.html">Contact</a>
         </nav>
 
@@ -137,9 +137,11 @@
   `;
 
   function injectStyle() {
-    if (document.getElementById("tb-style")) return;
+    const id = "tb-style";
+    const old = document.getElementById(id);
+    if (old) old.remove();
     const style = document.createElement("style");
-    style.id = "tb-style";
+    style.id = id;
     style.textContent = CSS;
     document.head.appendChild(style);
   }
@@ -150,26 +152,46 @@
     mountNode.innerHTML = HTML;
   }
 
-  function enableFadeNav() {
+  function onIndexPage() {
+    const p = (location.pathname.split("/").pop() || "index.html").toLowerCase();
+    return p === "" || p === "index.html";
+  }
+
+  function smoothScrollToAbout() {
+    const el = document.getElementById("about");
+    if (!el) return;
+    el.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  function enableNavLogic() {
     const fade = document.getElementById("tbFade");
     if (!fade) return;
 
     document.addEventListener("click", (e) => {
       const a = e.target?.closest?.("a");
       if (!a) return;
-      if (a.classList.contains("tb-disabled")) return;
-
-      const href = a.getAttribute("href") || "";
-      if (!href) return;
 
       // allow modified clicks/new tabs
       if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
       if (a.target === "_blank") return;
 
-      // don't fade for hash jumps
-      if (href.startsWith("#") || href.includes("#about")) return;
+      // ignore disabled
+      if (a.classList.contains("tb-disabled") || a.getAttribute("aria-disabled") === "true") return;
 
-      // avoid fading external
+      const href = a.getAttribute("href") || "";
+      if (!href) return;
+
+      // If it's About and we're already on index, do smooth scroll (NO fade)
+      if (a.dataset.nav === "about" && onIndexPage()) {
+        e.preventDefault();
+        smoothScrollToAbout();
+        return;
+      }
+
+      // If href contains a hash (like index.html#about), let browser handle it (NO fade)
+      if (href.includes("#")) return;
+
+      // Fade only for internal page-to-page navigations
       if (href.startsWith("http://") || href.startsWith("https://")) return;
 
       e.preventDefault();
@@ -180,5 +202,5 @@
 
   injectStyle();
   mount();
-  enableFadeNav();
+  enableNavLogic();
 })();

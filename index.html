@@ -5,15 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>ZIP 4</title>
   <meta name="description" content="ZIP 4 — conversion, refined for macOS." />
-  <link rel="icon" href="Logo.png" type="image/png">
+  <link rel="icon" href="Logo.png" type="image/png" />
 
   <style>
     :root{
       --ink: rgba(0,0,0,.82);
       --muted: rgba(0,0,0,.55);
       --line: rgba(0,0,0,.10);
+      --hair: rgba(0,0,0,.06);
       --radius: 18px;
+      --pill: rgba(255,255,255,.70);
     }
+
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
@@ -21,56 +24,13 @@
       color:var(--ink);
       background:#fff;
       font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text",Segoe UI,Roboto,Helvetica,Arial,sans-serif;
-      line-height:1.35;
+      line-height:1.55;
     }
+
     a{color:inherit;text-decoration:none}
-    .wrap{width:min(1040px,100%);margin:0 auto;padding:0 18px}
+    .wrap{width:min(1200px,100%);margin:0 auto;padding:0 22px}
 
-    /* Hero */
-    .hero{
-      min-height:calc(92vh - 58px);
-      display:flex;
-      align-items:center;
-      padding:56px 0 24px;
-    }
-    .hero__inner{text-align:center}
-    .hero__title{
-      font-size:18px;
-      font-weight:550;
-      color:rgba(0,0,0,.60);
-      opacity:0;
-      transform:translateY(18px);
-    }
-    .hero__slogan{
-      margin:16px auto 0;
-      max-width:1040px;
-      font-family:"Times New Roman", Times, serif;
-      font-weight:400;
-      letter-spacing:-.02em;
-      font-size:clamp(46px,5.8vw,88px);
-      line-height:1.02;
-      color:rgba(0,0,0,.86);
-      opacity:0;
-      transform:translateY(16px);
-    }
-    .hero__sub{
-      margin:16px auto 0;
-      max-width:780px;
-      font-size:16px;
-      color:var(--muted);
-      opacity:0;
-      transform:translateY(12px);
-    }
-    .hero__cta{
-      margin-top:22px;
-      display:flex;
-      gap:12px;
-      justify-content:center;
-      flex-wrap:wrap;
-      opacity:0;
-      transform:translateY(10px);
-    }
-
+    /* Buttons */
     .btn{
       border-radius:14px;
       padding:12px 16px;
@@ -100,6 +60,51 @@
       filter:saturate(.85);
     }
 
+    /* Hero */
+    .hero{
+      min-height:calc(92vh - 58px);
+      display:flex;
+      align-items:center;
+      padding:clamp(44px, 6vw, 64px) 0 24px;
+    }
+    .hero__inner{text-align:center}
+    .hero__title{
+      font-size:clamp(16px, 1.8vw, 18px);
+      font-weight:550;
+      color:rgba(0,0,0,.60);
+      opacity:0;
+      transform:translateY(18px);
+    }
+    .hero__slogan{
+      margin:16px auto 0;
+      max-width:1200px;
+      font-family:"Times New Roman", Times, serif;
+      font-weight:400;
+      letter-spacing:-.02em;
+      font-size:clamp(38px, 6vw, 88px);
+      line-height:1.02;
+      color:rgba(0,0,0,.86);
+      opacity:0;
+      transform:translateY(16px);
+    }
+    .hero__sub{
+      margin:16px auto 0;
+      max-width:900px;
+      font-size:clamp(14px, 1.6vw, 16px);
+      color:var(--muted);
+      opacity:0;
+      transform:translateY(12px);
+    }
+    .hero__cta{
+      margin-top:22px;
+      display:flex;
+      gap:12px;
+      justify-content:center;
+      flex-wrap:wrap;
+      opacity:0;
+      transform:translateY(10px);
+    }
+
     .soonLine{
       margin-top:12px;
       font-size:13px;
@@ -122,7 +127,7 @@
     }
     .cdPill{
       border:1px solid var(--line);
-      background:rgba(255,255,255,.70);
+      background:var(--pill);
       border-radius:999px;
       padding:7px 10px;
       font-size:12px;
@@ -142,7 +147,7 @@
     }
 
     /* Sections */
-    .section{padding:72px 0}
+    .section{padding:clamp(64px, 7vw, 92px) 0}
     .kicker{
       font-size:12px;
       color:rgba(0,0,0,.45);
@@ -153,7 +158,7 @@
     }
     .h2{
       margin:0 0 10px;
-      font-size:20px;
+      font-size:clamp(18px, 2vw, 20px);
       font-weight:650;
       letter-spacing:-.01em;
       text-align:center;
@@ -161,18 +166,19 @@
     .p{
       margin:0 auto;
       color:var(--muted);
-      max-width:820px;
-      line-height:1.55;
-      font-size:14px;
+      max-width:980px;
+      line-height:1.7;
+      letter-spacing:.01em;
+      font-size:clamp(13px, 1.4vw, 14px);
       text-align:center;
     }
 
     /* Steps */
     .steps{
-      margin-top:18px;
+      margin-top:22px;
       display:grid;
       grid-template-columns: repeat(4, 1fr);
-      gap:14px;
+      gap:18px;
     }
     .step{
       padding:14px 14px 12px;
@@ -190,57 +196,61 @@
       flex:0 0 auto;
     }
     .stepTitle{margin:0;font-size:14px;font-weight:650;letter-spacing:-.01em}
-    .stepText{margin:0;color:var(--muted);font-size:13px;line-height:1.45}
+    .stepText{margin:0;color:var(--muted);font-size:13px;line-height:1.65;letter-spacing:.01em}
 
     /* Highlights */
     .highlight{
-      margin-top:18px;
-      border-top:1px solid rgba(0,0,0,.06);
-      padding-top:18px;
+      margin-top:22px;
+      border-top:1px solid var(--hair);
+      padding-top:22px;
       display:grid;
       grid-template-columns: 1.05fr .95fr;
-      gap:18px;
+      gap:28px;
       align-items:start;
     }
-    .miniList{list-style:none;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:10px}
+    .highlightLeft{
+      display:flex;
+      flex-direction:column;
+      align-items:flex-start;
+      gap:14px;
+      padding-top:2px;
+    }
+
+    .miniList{
+      list-style:none;
+      padding:0;
+      margin:0;
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      max-width:620px;
+    }
     .chip{
       border:1px solid var(--line);
-      background:rgba(255,255,255,.70);
+      background:var(--pill);
       border-radius:999px;
       padding:7px 10px;
       font-size:12px;
       color:rgba(0,0,0,.65);
     }
-    .highlightActions{margin-top:16px;display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+
+    .highlightActions{
+      margin-top:6px;
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
 
     .shot{
+      justify-self:stretch;
+      align-self:start;
       border:1px solid var(--line);
       border-radius:22px;
       background: rgba(255,255,255,.70);
       overflow:hidden;
     }
-
-    /* About block */
-    .aboutBlock{padding:72px 0 84px}
-    .aboutTitle{
-      margin:0;
-      font-size:44px;
-      font-weight:650;
-      letter-spacing:-.02em;
-      text-align:center;
-      color:rgba(0,0,0,.80);
-    }
-    .aboutLinkWrap{display:flex;justify-content:center;margin-top:14px}
-    .aboutLink{
-      display:inline-flex;
-      padding:9px 12px;
-      border-radius:999px;
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.70);
-      font-size:13px;
-      color:rgba(0,0,0,.72);
-    }
-    .aboutLink:hover{background:rgba(255,255,255,.88);border-color:rgba(0,0,0,.12);color:rgba(0,0,0,.82)}
+    .shot img{width:100%;height:auto;display:block}
 
     footer{
       border-top:1px solid rgba(0,0,0,.08);
@@ -255,17 +265,14 @@
       .highlight{grid-template-columns: 1fr;}
     }
     @media (max-width: 860px){
-      .hero__slogan{font-size: clamp(40px, 10vw, 66px);}
       .steps{grid-template-columns: 1fr;}
-      .aboutTitle{font-size:34px;}
     }
   </style>
 </head>
 
 <body>
-  <!-- TOPBAR injected by topbar.js -->
   <div id="topbar"></div>
-  <script src="topbar.js"></script>
+  <script src="./topbar.js?v=5"></script>
 
   <script>
     const SLOGAN = "Conversion, refined for macOS.";
@@ -285,7 +292,7 @@
 
         <div class="hero__cta" id="heroCta">
           <a class="btn btn--primary btn--disabled" href="#" aria-disabled="true">Coming soon</a>
-          <a class="btn" href="#how">How it works</a>
+          <a class="btn" href="#about">More about</a>
         </div>
 
         <div class="soonLine" id="soonLine">
@@ -302,7 +309,8 @@
       </div>
     </section>
 
-    <section class="section" id="how">
+    <!-- ABOUT anchor (this is where topbar About should go) -->
+    <section class="section" id="about">
       <div class="wrap">
         <div class="kicker">How it works</div>
         <h2 class="h2">A simple flow, end to end.</h2>
@@ -328,11 +336,11 @@
         </div>
 
         <div class="highlight">
-          <div>
-            <div class="kicker" style="text-align:left;">Highlights</div>
-            <h2 class="h2" style="text-align:left;margin-bottom:8px;">A small app that saves time.</h2>
+          <div class="highlightLeft">
+            <div class="kicker" style="text-align:left;margin:0;">Highlights</div>
+            <h2 class="h2" style="text-align:left;margin:0;">A small app that saves time.</h2>
 
-            <p class="p" style="text-align:left;margin:0 0 14px;">
+            <p class="p" style="text-align:left;margin:0;">
               ZIP 4 is a macOS menu bar app that lets you convert files from one format to another — right from a clean, convenient, and intuitive place.
             </p>
 
@@ -349,23 +357,14 @@
               <a class="btn btn--disabled" href="./changelog.html" aria-disabled="true">View changelog</a>
             </div>
 
-            <div class="soonLine" style="opacity:1;transform:none;margin-top:12px;">
+            <div class="soonLine" style="opacity:1;transform:none;margin:0;">
               Available <strong>February 1</strong>.
             </div>
           </div>
 
           <div class="shot" aria-label="App preview">
-            <img src="header.png" alt="ZIP 4 app interface" style="width:100%;height:auto;display:block;">
+            <img src="./Header.png?v=5" alt="ZIP 4 app interface" />
           </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="aboutBlock" id="about">
-      <div class="wrap">
-        <h2 class="aboutTitle">Built by Shala Software.</h2>
-        <div class="aboutLinkWrap">
-          <a class="aboutLink" href="./shala-software.html">About Shala Software →</a>
         </div>
       </div>
     </section>

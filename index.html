@@ -19,6 +19,7 @@
 
     *{box-sizing:border-box}
     html,body{height:100%}
+
     body{
       margin:0;
       color:var(--ink);
@@ -28,7 +29,10 @@
     }
 
     a{color:inherit;text-decoration:none}
-    .wrap{width:min(1200px,100%);margin:0 auto;padding:0 22px}
+    .wrap{width:min(1200px,100%);margin:0 auto;padding:0 clamp(16px, 3vw, 22px);}
+
+    /* Make anchor land higher (compensate sticky topbar) */
+    #about{ scroll-margin-top: 82px; }
 
     /* Buttons */
     .btn{
@@ -65,7 +69,7 @@
       min-height:calc(92vh - 58px);
       display:flex;
       align-items:center;
-      padding:clamp(44px, 6vw, 64px) 0 24px;
+      padding:clamp(42px, 6vw, 64px) 0 24px;
     }
     .hero__inner{text-align:center}
     .hero__title{
@@ -272,7 +276,7 @@
 
 <body>
   <div id="topbar"></div>
-  <script src="./topbar.js?v=5"></script>
+  <script src="./topbar.js?v=6"></script>
 
   <script>
     const SLOGAN = "Conversion, refined for macOS.";
@@ -309,7 +313,6 @@
       </div>
     </section>
 
-    <!-- ABOUT anchor (this is where topbar About should go) -->
     <section class="section" id="about">
       <div class="wrap">
         <div class="kicker">How it works</div>
@@ -363,7 +366,7 @@
           </div>
 
           <div class="shot" aria-label="App preview">
-            <img src="./Header.png?v=5" alt="ZIP 4 app interface" />
+            <img src="./Header.png?v=6" alt="ZIP 4 app interface" />
           </div>
         </div>
       </div>

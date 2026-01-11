@@ -27,7 +27,6 @@
   const CSS = `
     :root{
       --tb-ink: rgba(0,0,0,.82);
-      --tb-muted: rgba(0,0,0,.55);
       --tb-border: rgba(0,0,0,.10);
       --tb-hair: rgba(0,0,0,.08);
       --tb-bg: rgba(244,244,244,.86);
@@ -157,10 +156,38 @@
     return p === "" || p === "index.html";
   }
 
-  function smoothScrollToAbout() {
+  // Smooth scroll with duration control (more natural than native)
+  function smoothScrollTo(targetY, duration = 520) {
+    const startY = window.scrollY || window.pageYOffset;
+    const delta = targetY - startY;
+    const start = performance.now();
+
+    const easeInOut = (t) => (t < 0.5)
+      ? 4 * t * t * t
+      : 1 - Math.pow(-2 * t + 2, 3) / 2;
+
+    function step(now) {
+      const t = Math.min(1, (now - start) / duration);
+      const eased = easeInOut(t);
+      window.scrollTo(0, startY + delta * eased);
+      if (t < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  function scrollToAbout() {
     const el = document.getElementById("about");
     if (!el) return;
-    el.scrollIntoView({ behavior: "smooth", block: "start" });
+
+    // Offset for sticky bar + a little breathing room
+    const topOffset = 74; // px
+    const y = Math.max(0, el.getBoundingClientRect().top + window.scrollY - topOffset);
+
+    // Duration based on distance (natural)
+    const dist = Math.abs(y - window.scrollY);
+    const duration = Math.min(900, Math.max(420, dist * 0.45));
+
+    smoothScrollTo(y, duration);
   }
 
   function enableNavLogic() {
@@ -171,29 +198,26 @@
       const a = e.target?.closest?.("a");
       if (!a) return;
 
-      // allow modified clicks/new tabs
       if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
       if (a.target === "_blank") return;
-
-      // ignore disabled
       if (a.classList.contains("tb-disabled") || a.getAttribute("aria-disabled") === "true") return;
 
       const href = a.getAttribute("href") || "";
-      if (!href) return;
 
-      // If it's About and we're already on index, do smooth scroll (NO fade)
+      // About: if already on index -> smooth scroll (no fade)
       if (a.dataset.nav === "about" && onIndexPage()) {
         e.preventDefault();
-        smoothScrollToAbout();
+        scrollToAbout();
         return;
       }
 
-      // If href contains a hash (like index.html#about), let browser handle it (NO fade)
+      // For any hash links, let browser handle (no fade)
       if (href.includes("#")) return;
 
-      // Fade only for internal page-to-page navigations
+      // External links: no fade
       if (href.startsWith("http://") || href.startsWith("https://")) return;
 
+      // Page fade for page-to-page
       e.preventDefault();
       fade.classList.add("is-on");
       setTimeout(() => { window.location.href = href; }, 160);

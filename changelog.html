@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ZIP 4 — Changelog</title>
+  <link rel="icon" href="Logo.png" type="image/png" />
+
+  <script>
+    window.ZIP4_SITE = { live: false, downloadUrl: "#", releaseLabel: "February 1" };
+  </script>
+
+  <style>
+    :root{
+      --ink: rgba(0,0,0,.82);
+      --muted: rgba(0,0,0,.55);
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      color:var(--ink);
+      background:#fff;
+      font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text",Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      line-height:1.55;
+    }
+    .wrap{width:min(1040px,100%);margin:0 auto;padding:0 18px}
+
+    .page{padding:72px 0}
+    .kicker{text-align:center;font-size:12px;color:rgba(0,0,0,.45);letter-spacing:.10em;text-transform:uppercase;margin-bottom:10px}
+    h1{text-align:center;margin:0 0 10px;font-size:22px;font-weight:650;letter-spacing:-.01em}
+    .p{text-align:center;margin:0 auto;color:var(--muted);max-width:760px;line-height:1.7;font-size:14px}
+
+    .entry{
+      margin:18px auto 0;
+      max-width:760px;
+      border-top:1px solid rgba(0,0,0,.06);
+      padding-top:18px;
+    }
+    .entryTop{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:baseline}
+    .ver{font-weight:750}
+    .date{color:rgba(0,0,0,.50);font-size:13px}
+    ul{margin:10px 0 0;padding-left:18px;color:rgba(0,0,0,.78)}
+    li{margin:6px 0}
+
+    footer{
+      border-top:1px solid rgba(0,0,0,.08);
+      padding:22px 0;
+      font-size:12px;
+      color:rgba(0,0,0,.45);
+      text-align:center;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="topbar"></div>
+  <script src="./topbar.js?v=10"></script>
+
+  <main class="page">
+    <div class="wrap">
+      <div class="kicker">Changelog</div>
+      <h1>Release notes</h1>
+      <p class="p">This page will be enabled at launch.</p>
+
+      <div class="entry">
+        <div class="entryTop">
+          <div class="ver">v0.1</div>
+          <div class="date">— February 1</div>
+        </div>
+        <ul>
+          <li>First public release.</li>
+          <li>Core conversion flow.</li>
+          <li>UI polish and stability fixes.</li>
+        </ul>
+      </div>
+    </div>
+  </main>
+
+  <footer>© <span id="year"></span> Shala Software</footer>
+  <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+</body>
+</html>

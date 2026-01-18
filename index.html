@@ -1,0 +1,519 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ZIP 4</title>
+  <meta name="description" content="ZIP 4 — conversion, refined for macOS." />
+  <link rel="icon" href="Logo.png" type="image/png" />
+
+  <style>
+    :root{
+      --ink: rgba(0,0,0,.82);
+      --muted: rgba(0,0,0,.55);
+      --line: rgba(0,0,0,.10);
+      --hair: rgba(0,0,0,.06);
+      --pill: rgba(255,255,255,.70);
+      --radius: 18px;
+
+      --wrap-max: 1240px;
+      --wrap-pad: clamp(16px, 3vw, 28px);
+    }
+    @media (min-width: 1200px){ :root{ --wrap-max: 1400px; } }
+    @media (min-width: 1600px){ :root{ --wrap-max: 1580px; } }
+    @media (min-width: 2000px){ :root{ --wrap-max: 1760px; } }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      color:var(--ink);
+      background:#fff;
+      font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text",Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      line-height:1.55;
+    }
+
+    a{color:inherit;text-decoration:none}
+    .wrap{width:min(var(--wrap-max), 100%);margin:0 auto;padding:0 var(--wrap-pad);}
+
+    /* Buttons */
+    .btn{
+      border-radius:14px;
+      padding:12px 16px;
+      border:1px solid var(--line);
+      font-weight:650;
+      font-size:14px;
+      background:#fff;
+      color:rgba(0,0,0,.82);
+      transition: background .15s ease, border-color .15s ease, opacity .15s ease, transform .15s ease;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      cursor:pointer;
+      white-space:nowrap;
+    }
+    .btn:hover{background:rgba(0,0,0,.02);border-color:rgba(0,0,0,.12)}
+    .btn:active{transform:translateY(1px)}
+    .btn--primary{
+      background:rgba(0,0,0,.86);
+      border-color:rgba(0,0,0,.22);
+      color:#fff;
+    }
+    .btn--primary:hover{background:rgba(0,0,0,.92)}
+    .btn--disabled{
+      opacity:.55;
+      pointer-events:none;
+      cursor:not-allowed;
+      filter:saturate(.85);
+    }
+
+    /* HERO */
+    .hero{
+      min-height:calc(92vh - 58px);
+      display:flex;
+      align-items:center;
+      padding:clamp(44px, 6vw, 74px) 0 26px;
+    }
+    .hero__inner{text-align:center}
+
+    .hero__title{
+      font-size:clamp(15px, 1.4vw, 18px);
+      font-weight:600;
+      color:rgba(0,0,0,.60);
+      opacity:0;
+      transform:translateY(18px);
+    }
+
+    .hero__countdownWrap{
+      margin-top:12px;
+      display:flex;
+      justify-content:center;
+      opacity:0;
+      transform:translateY(10px);
+    }
+    .countdown{
+      display:inline-flex;
+      gap:8px;
+      flex-wrap:wrap;
+      align-items:center;
+      justify-content:center;
+    }
+    .cdPill{
+      border:1px solid var(--line);
+      background:var(--pill);
+      border-radius:999px;
+      padding:7px 10px;
+      font-size:12px;
+      color:rgba(0,0,0,.70);
+      display:flex;
+      gap:8px;
+      align-items:baseline;
+    }
+    .cdNum{font-weight:750; font-variant-numeric: tabular-nums}
+    .cdLbl{font-size:11px; letter-spacing:.06em; text-transform:uppercase; color:rgba(0,0,0,.50)}
+    .cdText{font-size:12px; color:rgba(0,0,0,.50)}
+
+    .hero__slogan{
+      margin:16px auto 0;
+      max-width:min(1200px, 92%);
+      font-weight:750;
+      letter-spacing:-.03em;
+      font-size:clamp(40px, 5.4vw, 92px);
+      line-height:1.03;
+      color:rgba(0,0,0,.86);
+      opacity:0;
+      transform:translateY(16px);
+    }
+
+    .hero__sub{
+      margin:16px auto 0;
+      max-width:min(980px, 92%);
+      font-size:clamp(14px, 1.35vw, 17px);
+      color:var(--muted);
+      line-height:1.75;
+      opacity:0;
+      transform:translateY(12px);
+    }
+
+    .hero__cta{
+      margin-top:22px;
+      display:flex;
+      gap:12px;
+      justify-content:center;
+      flex-wrap:wrap;
+      opacity:0;
+      transform:translateY(10px);
+    }
+
+    .show{
+      opacity:1 !important;
+      transform:translateY(0)!important;
+      transition:opacity .6s ease,transform .6s cubic-bezier(.2,.8,.2,1);
+    }
+
+    .divider{
+      height:1px;
+      background:rgba(0,0,0,.08);
+      max-width:min(var(--wrap-max), calc(100% - (var(--wrap-pad) * 2)));
+      margin: 10px auto 0;
+      border-radius:999px;
+    }
+
+    /* ABOUT */
+    .section{padding:clamp(70px, 6vw, 98px) 0}
+    .section--about{padding-bottom: clamp(120px, 10vw, 190px);}
+
+    .kicker{
+      font-size:12px;
+      color:rgba(0,0,0,.45);
+      letter-spacing:.10em;
+      text-transform:uppercase;
+      margin-bottom:10px;
+      text-align:center;
+    }
+    .h2{
+      margin:0 0 10px;
+      font-size:clamp(18px, 1.8vw, 22px);
+      font-weight:650;
+      letter-spacing:-.01em;
+      text-align:center;
+    }
+    .p{
+      margin:0 auto;
+      color:var(--muted);
+      max-width:min(1040px, 96%);
+      line-height:1.75;
+      letter-spacing:.01em;
+      font-size:clamp(13px, 1.2vw, 15px);
+      text-align:center;
+    }
+
+    .steps{
+      margin-top:24px;
+      display:grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap:clamp(14px, 1.4vw, 20px);
+    }
+    .step{
+      padding:16px 16px 14px;
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(0,0,0,.02);
+    }
+    .stepTop{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+    .num{
+      width:26px;height:26px;border-radius:10px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.75);
+      display:grid;place-items:center;
+      font-size:12px;font-weight:750;color:rgba(0,0,0,.65);
+      flex:0 0 auto;
+    }
+    .stepTitle{margin:0;font-size:14px;font-weight:650;letter-spacing:-.01em}
+    .stepText{margin:0;color:var(--muted);font-size:13px;line-height:1.65;letter-spacing:.01em}
+
+    .highlight{
+      margin-top:26px;
+      border-top:1px solid var(--hair);
+      padding-top:24px;
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap:clamp(18px, 2.2vw, 34px);
+      align-items:start;
+    }
+    .highlightLeft{
+      display:flex;
+      flex-direction:column;
+      align-items:flex-start;
+      gap:14px;
+      padding-top:2px;
+    }
+
+    .miniList{
+      list-style:none;
+      padding:0;
+      margin:0;
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      max-width: 760px;
+    }
+    .chip{
+      border:1px solid var(--line);
+      background:var(--pill);
+      border-radius:999px;
+      padding:7px 10px;
+      font-size:12px;
+      color:rgba(0,0,0,.65);
+      white-space:nowrap;
+    }
+
+    .highlightActions{
+      margin-top:6px;
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+
+    .shot{
+      border:1px solid var(--line);
+      border-radius:22px;
+      background: rgba(255,255,255,.70);
+      overflow:hidden;
+    }
+    .shot img{width:100%;height:auto;display:block}
+
+    /* Privacy + Smart conversion cards */
+    .cards2{
+      margin-top:18px;
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:14px;
+    }
+    .card{
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(0,0,0,.02);
+      padding:16px;
+    }
+    .cardTitle{
+      margin:0 0 8px;
+      font-size:14px;
+      font-weight:750;
+      color:rgba(0,0,0,.82);
+      letter-spacing:-.01em;
+    }
+    .cardText{
+      margin:0;
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.6;
+    }
+    .cardActions{
+      margin-top:12px;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+
+    footer{
+      border-top:1px solid rgba(0,0,0,.08);
+      padding:22px 0;
+      font-size:12px;
+      color:rgba(0,0,0,.45);
+      text-align:center;
+    }
+    .footerLinks{
+      margin-top:10px;
+      display:flex;
+      justify-content:center;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+    .footerLinks a{
+      border:1px solid var(--line);
+      background:var(--pill);
+      border-radius:999px;
+      padding:8px 10px;
+      font-size:12px;
+      color:rgba(0,0,0,.70);
+    }
+    .footerLinks a:hover{background:rgba(255,255,255,.88);border-color:rgba(0,0,0,.12);color:rgba(0,0,0,.82)}
+
+    @media (max-width: 980px){
+      .steps{grid-template-columns: repeat(2, minmax(0, 1fr));}
+      .highlight{grid-template-columns: 1fr;}
+      .cards2{grid-template-columns: 1fr;}
+    }
+    @media (max-width: 640px){
+      .steps{grid-template-columns: 1fr;}
+    }
+  </style>
+</head>
+
+<body>
+  <script>
+    window.ZIP4_SITE = { downloadUrl: "#", releaseIso: "2026-02-01T12:00:00+01:00" };
+  </script>
+  <div id="topbar"></div>
+  <script src="./topbar.js?v=15"></script>
+
+  <script>
+    const SLOGAN = "Conversion, refined for macOS.";
+    const TARGET_ISO = "2026-02-01T12:00:00+01:00";
+  </script>
+
+  <main>
+    <section class="hero" id="top">
+      <div class="wrap hero__inner">
+        <div class="hero__title" id="heroTitle">ZIP 4</div>
+
+        <div class="hero__countdownWrap" id="cdWrap">
+          <div class="countdown" aria-label="Release countdown">
+            <span class="cdPill"><span class="cdNum" id="cdDays">—</span><span class="cdLbl">Days</span></span>
+            <span class="cdPill"><span class="cdNum" id="cdHours">—</span><span class="cdLbl">Hours</span></span>
+            <span class="cdPill"><span class="cdNum" id="cdMins">—</span><span class="cdLbl">Min</span></span>
+            <span class="cdPill"><span class="cdNum" id="cdSecs">—</span><span class="cdLbl">Sec</span></span>
+            <span class="cdText" id="cdText"></span>
+          </div>
+        </div>
+
+        <h1 class="hero__slogan" id="heroSlogan"></h1>
+
+        <p class="hero__sub" id="heroSub">
+          Native drag & drop. Clean output. No clutter.
+        </p>
+
+        <div class="hero__cta" id="heroCta">
+          <a class="btn btn--primary btn--disabled" href="#" aria-disabled="true">Coming soon</a>
+          <a class="btn" href="#about">About</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider" aria-hidden="true"></div>
+
+    <section class="section section--about" id="about">
+      <div class="wrap">
+        <div class="kicker">How it works</div>
+        <!-- ✅ Updated headline + paragraph with privacy + smart conversion -->
+        <h2 class="h2">A simple flow, end to end — private by design.</h2>
+        <p class="p">
+          Smart conversion picks sensible defaults and keeps the interface minimal, while everything runs locally on your Mac — no logs, no tracking.
+        </p>
+
+        <div class="steps">
+          <div class="step">
+            <div class="stepTop"><div class="num">1</div><p class="stepTitle">Open from the menu bar</p></div>
+            <p class="stepText">Always available, without taking space on your desktop.</p>
+          </div>
+          <div class="step">
+            <div class="stepTop"><div class="num">2</div><p class="stepTitle">Drop your file</p></div>
+            <p class="stepText">Native drag & drop makes importing effortless.</p>
+          </div>
+          <div class="step">
+            <div class="stepTop"><div class="num">3</div><p class="stepTitle">Choose format</p></div>
+            <p class="stepText">Only the essentials — clean controls, no clutter.</p>
+          </div>
+          <div class="step">
+            <div class="stepTop"><div class="num">4</div><p class="stepTitle">Export</p></div>
+            <p class="stepText">Get a clean output. Optionally hit a target size.</p>
+          </div>
+        </div>
+
+        <div class="highlight">
+          <div class="highlightLeft">
+            <div class="kicker" style="text-align:left;margin:0;">Highlights</div>
+            <h2 class="h2" style="text-align:left;margin:0;">A small app that saves time.</h2>
+
+            <p class="p" style="text-align:left;margin:0;">
+              ZIP 4 is a macOS menu bar app that lets you convert files from one format to another — right from a clean, convenient, and intuitive place.
+            </p>
+
+            <ul class="miniList">
+              <li class="chip">Menu bar workflow</li>
+              <li class="chip">Native drag & drop</li>
+              <li class="chip">Clean export</li>
+              <li class="chip">Offline</li>
+              <li class="chip">Target size</li>
+            </ul>
+
+            <div class="highlightActions">
+              <a class="btn btn--primary btn--disabled" href="#" aria-disabled="true">Coming soon</a>
+              <a class="btn btn--disabled" href="./changelog.html" aria-disabled="true">View changelog</a>
+              <a class="btn" href="./shala-software.html">Shala Software →</a>
+            </div>
+          </div>
+
+          <div class="shot" aria-label="ZIP 4 demo interface">
+            <img src="./Header.png?v=15" alt="ZIP 4 interface preview" />
+          </div>
+        </div>
+
+        <div class="cards2">
+          <div class="card">
+            <p class="cardTitle">Privacy-first. No logs.</p>
+            <p class="cardText">
+              ZIP 4 is designed to respect your privacy by default. Conversions run locally on your Mac and
+              we don’t track your files, content, or conversion history. No accounts, no profiling — just your workflow, on your device.
+            </p>
+            <div class="cardActions">
+              <a class="btn" href="./privacy.html">Read privacy</a>
+            </div>
+          </div>
+
+          <div class="card">
+            <p class="cardTitle">Smart conversion</p>
+            <p class="cardText">
+              ZIP 4 aims to pick sensible defaults automatically and keep the interface minimal: it focuses on the options that matter,
+              avoids unnecessary steps, and helps you get clean results quickly — even when formats behave differently.
+            </p>
+            <div class="cardActions">
+              <a class="btn" href="./changelog.html" aria-disabled="true" style="opacity:.55; pointer-events:none;">Details soon</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <footer>
+      © 2026 Shala Software
+      <div class="footerLinks">
+        <a href="./privacy.html">Privacy</a>
+        <a href="./contact.html">Contact</a>
+        <a href="./shala-software.html">Shala Software</a>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    document.getElementById("heroSlogan").textContent = SLOGAN;
+
+    // intro
+    function intro(){
+      ["heroTitle","cdWrap","heroSlogan","heroSub","heroCta"].forEach((id,i)=>{
+        const el = document.getElementById(id);
+        if (!el) return;
+        setTimeout(()=> el.classList.add("show"),150+i*170);
+      });
+    }
+    intro();
+
+    // countdown
+    const target = new Date(TARGET_ISO).getTime();
+    const elDays = document.getElementById("cdDays");
+    const elHours = document.getElementById("cdHours");
+    const elMins = document.getElementById("cdMins");
+    const elSecs = document.getElementById("cdSecs");
+    const elText = document.getElementById("cdText");
+    const pad2 = n => String(n).padStart(2,"0");
+
+    function tick(){
+      const now = Date.now();
+      const diff = Math.max(0, target - now);
+      if (diff === 0){
+        elDays.textContent="0"; elHours.textContent="00"; elMins.textContent="00"; elSecs.textContent="00";
+        elText.textContent="Available now.";
+        return;
+      }
+      const totalSeconds = Math.floor(diff/1000);
+      const days = Math.floor(totalSeconds/86400);
+      const hours = Math.floor((totalSeconds%86400)/3600);
+      const mins = Math.floor((totalSeconds%3600)/60);
+      const secs = totalSeconds%60;
+
+      elDays.textContent=String(days);
+      elHours.textContent=pad2(hours);
+      elMins.textContent=pad2(mins);
+      elSecs.textContent=pad2(secs);
+      elText.textContent="until release.";
+    }
+    tick();
+    setInterval(tick, 1000);
+  </script>
+</body>
+</html>

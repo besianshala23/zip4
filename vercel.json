@@ -1,0 +1,12 @@
+{
+  "rewrites": [
+    { "source": "/heic-to-jpg", "destination": "/" },
+    { "source": "/png-to-jpg", "destination": "/" },
+    { "source": "/webp-to-jpg", "destination": "/" },
+    { "source": "/jpg-to-webp", "destination": "/" },
+    { "source": "/compress-jpg", "destination": "/" },
+    { "source": "/compress-png", "destination": "/" },
+    { "source": "/resize-image", "destination": "/" },
+    { "source": "/image-converter", "destination": "/" }
+  ]
+}

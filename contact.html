@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#161618" />
+  <meta name="color-scheme" content="dark light" />
+  <title>Contact</title>
+
+  <script>
+    window.ZIP4_SITE = { downloadUrl: "#", releaseIso: "2026-02-01T12:00:00+01:00" };
+  </script>
+
+  <style>
+    :root{
+      --title:#2C2C2E;
+      --text:#3A3A3C;
+      --muted:#6E6E73;
+      --line:rgba(0,0,0,.10);
+      --radius:22px;
+    }
+
+    *{box-sizing:border-box}
+    html, body{ height:100%; background:#fff; }
+    body{
+      margin:0;
+      min-height:100svh;
+      display:flex;
+      flex-direction:column;
+      color:var(--text);
+      font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display","Helvetica Neue",Arial,sans-serif;
+      line-height:1.7;
+    }
+    main{ flex:1; }
+
+    .pad{
+      width:100%;
+      padding-left: clamp(18px, 4vw, 64px);
+      padding-right: clamp(18px, 4vw, 64px);
+    }
+
+    .page{
+      padding-top: 96px;
+      padding-bottom: 70px;
+    }
+
+    .kicker{
+      text-align:center;
+      font-size:12px;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      color:var(--muted);
+      margin-bottom:10px;
+    }
+
+    h1{
+      margin:0 auto 10px;
+      text-align:center;
+      font-size: 22px;
+      font-weight:720;
+      letter-spacing:-.01em;
+      color:var(--title);
+      max-width: 900px;
+    }
+
+    .p{
+      text-align:center;
+      margin:0 auto;
+      color:var(--muted);
+      max-width: 760px;
+      font-size:14px;
+      line-height:1.8;
+    }
+
+    .form{
+      margin: 22px auto 0;
+      width: min(760px, 100%);
+      border-top:1px solid rgba(0,0,0,.06);
+      padding-top: 18px;
+      display:grid;
+      gap: 12px;
+    }
+
+    label{display:grid;gap:6px}
+    .lbl{font-size:12px;color: rgba(60,60,67,.60);}
+
+    input, textarea{
+      border:1px solid rgba(0,0,0,.12);
+      background:#fff;
+      border-radius: 16px;
+      padding:12px 12px;
+      font-size:14px;
+      font-family:inherit;
+      outline:none;
+      transition:border-color .15s ease, background .15s ease;
+    }
+    input:focus, textarea:focus{
+      border-color: rgba(0,0,0,.18);
+      background: rgba(0,0,0,.01);
+    }
+    textarea{resize:vertical}
+
+    .row{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      align-items:center;
+      margin-top: 8px;
+    }
+
+    .btn{
+      border-radius: 16px;
+      padding:12px 16px;
+      border:1px solid rgba(0,0,0,.12);
+      font-size:14px;
+      background:#fff;
+      color: rgba(44,44,46,.92);
+      cursor:pointer;
+      transition: background .15s ease, border-color .15s ease;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+    }
+    .btn:hover{ background: rgba(0,0,0,.02); border-color: rgba(0,0,0,.14); }
+
+    .btnPrimary{
+      background: rgba(44,44,46,.92);
+      color: rgba(255,255,255,.92);
+      border-color: rgba(0,0,0,.10);
+      font-weight: 650;
+      padding: 12px 20px;
+      min-width: 110px;
+    }
+    .btnPrimary:hover{ background: rgba(36,36,38,.96); }
+
+    .status{ font-size:13px; color: var(--muted); min-height: 18px; }
+    .ok{ color:#0a7a2f; }
+    .err{ color:#b00020; }
+
+    footer{
+      margin-top:auto;
+      border-top:1px solid rgba(0,0,0,.08);
+      padding:22px 0;
+      font-size:12px;
+      color: rgba(60,60,67,.55);
+      text-align:center;
+      background:#fff;
+    }
+
+    .links{
+      margin-top:10px;
+      display:flex;
+      gap:10px;
+      justify-content:center;
+      flex-wrap:wrap;
+    }
+
+    .links a{
+      border:1px solid rgba(0,0,0,.12);
+      background: rgba(0,0,0,.02);
+      border-radius:999px;
+      padding:8px 10px;
+      font-size:12px;
+      color: rgba(60,60,67,.72);
+      text-decoration:none;
+      transition: background .15s ease, border-color .15s ease;
+    }
+    .links a:hover{ background:rgba(0,0,0,.03); border-color:rgba(0,0,0,.14); }
+  </style>
+</head>
+
+<body>
+  <script src="./topbar.js"></script>
+
+  <main class="page">
+    <div class="pad">
+      <div class="kicker">Contact</div>
+      <h1>Support</h1>
+      <p class="p">Send a message and we’ll get back to you.</p>
+
+      <form class="form" id="contactForm" action="https://formspree.io/f/xqkrvzbp" method="POST">
+        <label>
+          <div class="lbl">Your name</div>
+          <input name="name" placeholder="Jane Doe" required />
+        </label>
+
+        <label>
+          <div class="lbl">Your email</div>
+          <input name="email" type="email" placeholder="jane@email.com" required />
+        </label>
+
+        <label>
+          <div class="lbl">Message</div>
+          <textarea name="message" rows="6" placeholder="Tell us what you need…" required></textarea>
+        </label>
+
+        <div class="row">
+          <button class="btn btnPrimary" type="submit">Send</button>
+          <div class="status" id="status"></div>
+        </div>
+      </form>
+    </div>
+  </main>
+
+  <footer>
+    © <span id="year"></span> Shala Software
+    <div class="links">
+      <a href="./index.html">Converter</a>
+      <a href="./download.html">Download</a>
+      <a href="./privacy.html">Privacy</a>
+      <a href="./shala-software.html">Shala Software</a>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = String(new Date().getFullYear());
+
+    const form = document.getElementById("contactForm");
+    const statusEl = document.getElementById("status");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      statusEl.textContent = "Sending…";
+      statusEl.className = "status";
+
+      try {
+        const res = await fetch(form.action, {
+          method: "POST",
+          body: new FormData(form),
+          headers: { "Accept": "application/json" }
+        });
+
+        if (res.ok) {
+          statusEl.textContent = "Message sent. Thank you!";
+          statusEl.className = "status ok";
+          form.reset();
+        } else {
+          statusEl.textContent = "Could not send. Try again in a moment.";
+          statusEl.className = "status err";
+        }
+      } catch {
+        statusEl.textContent = "Could not send. Try again in a moment.";
+        statusEl.className = "status err";
+      }
+    });
+  </script>
+</body>
+</html>

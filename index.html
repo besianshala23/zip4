@@ -1,0 +1,1030 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>ZIP 4 — Online file converter</title>
+  <meta name="application-name" content="ZIP 4">
+  <meta name="description" content="ZIP 4 is a fast, privacy-first online file converter. Convert, resize, compress, and download — in a clean workflow." />
+
+  <meta name="robots" content="index,follow" />
+  <link rel="canonical" href="https://zip4.dev/" />
+
+  <script>
+    (function() {
+      const path = window.location.pathname.replace(/\/$/, ""); 
+      const routes = {
+        '/heic-to-jpg': {
+          title: 'Convert HEIC to JPG Online — ZIP 4',
+          desc: 'Fast, private HEIC to JPG conversion. Your Apple photos stay on your device.',
+          h1: 'Convert HEIC to JPG',
+          sub: 'Quickly convert HEIC images to JPG format locally in your browser.'
+        },
+        '/png-to-jpg': {
+          title: 'Convert PNG to JPG Online — ZIP 4',
+          desc: 'Transform your PNG images into high-quality JPG files instantly.',
+          h1: 'Convert PNG to JPG',
+          sub: 'Fast and private PNG to JPG converter.'
+        },
+        '/webp-to-jpg': {
+          title: 'Convert WEBP to JPG Online — ZIP 4',
+          desc: 'Easily change WEBP images to JPG format with our local converter.',
+          h1: 'Convert WEBP to JPG',
+          sub: 'Turn next-gen WEBP images into universally compatible JPGs.'
+        },
+        '/jpg-to-webp': {
+          title: 'Convert JPG to WEBP Online — ZIP 4',
+          desc: 'Compress and convert JPG to WEBP for faster web loading.',
+          h1: 'Convert JPG to WEBP',
+          sub: 'Optimize your images by converting JPG files to WEBP.'
+        },
+        '/compress-jpg': {
+          title: 'Compress JPG Images Online — ZIP 4',
+          desc: 'Reduce JPG file size without losing quality using our local engine.',
+          h1: 'Compress JPG Images',
+          sub: 'Reduce the file size of your JPG images instantly and securely.'
+        },
+        '/compress-png': {
+          title: 'Compress PNG Images Online — ZIP 4',
+          desc: 'Shrink PNG file sizes quickly while maintaining transparency and quality.',
+          h1: 'Compress PNG Images',
+          sub: 'Reduce the weight of your PNG files entirely in your browser.'
+        },
+        '/resize-image': {
+          title: 'Resize Images Online — ZIP 4',
+          desc: 'Change image dimensions easily. Resize photos locally and privately.',
+          h1: 'Resize Images Online',
+          sub: 'Scale down your images to standard resolutions in one click.'
+        },
+        '/image-converter': {
+          title: 'Online Image Converter — ZIP 4',
+          desc: 'Convert images between JPG, PNG, WEBP, and more with our private tool.',
+          h1: 'Online Image Converter',
+          sub: 'A fast, private tool to convert images between various formats.'
+        }
+      };
+
+      const currentRoute = routes[path];
+      if (currentRoute) {
+        // Aggiorna i Meta Tag SEO istantaneamente
+        document.title = currentRoute.title;
+        
+        // Aspetta che il DOM sia caricato per modificare gli elementi
+        window.addEventListener('DOMContentLoaded', () => {
+          const metaDesc = document.querySelector('meta[name="description"]');
+          if (metaDesc) metaDesc.content = currentRoute.desc;
+
+          const canonical = document.querySelector('link[rel="canonical"]');
+          if (canonical) canonical.href = 'https://zip4.dev' + path;
+
+          const h1 = document.querySelector('#converter h1');
+          const sub = document.querySelector('#converter .sub');
+          if (h1) h1.textContent = currentRoute.h1;
+          if (sub) sub.textContent = currentRoute.sub;
+        });
+      }
+    })();
+  </script>
+
+  <meta name="theme-color" content="#161618">
+  <link rel="icon" href="./Logo.png" type="image/png" />
+  <link rel="apple-touch-icon" href="./Logo.png" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="ZIP 4" />
+  <meta property="og:title" content="ZIP 4" />
+  <meta property="og:description" content="Fast, privacy-first online file converter. Convert, resize, compress, and download." />
+  <meta property="og:url" content="https://zip4.dev/" />
+  <meta property="og:image" content="https://zip4.dev/Logo.png" />
+  <meta property="og:image:alt" content="ZIP 4 logo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="ZIP 4" />
+  <meta name="twitter:description" content="Fast, privacy-first online file converter. Convert, resize, compress, and download." />
+  <meta name="twitter:image" content="https://zip4.dev/Logo.png" />
+  <meta name="twitter:image:alt" content="ZIP 4 logo" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "ZIP 4",
+    "alternateName": "ZIP4",
+    "url": "https://zip4.dev/"
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "ZIP 4",
+    "url": "https://zip4.dev/",
+    "applicationCategory": "FileConverter",
+    "operatingSystem": "Web",
+    "description": "Online file converter to convert, resize and compress files.",
+    "browserRequirements": "Requires JavaScript"
+  }
+  </script>
+
+  <style>
+    :root{
+      --title:#2C2C2E;
+      --topPad:88px;
+      --text:#3A3A3C;
+      --muted:#6E6E73;
+      --border:rgba(0,0,0,.12);
+      --bgSoft:rgba(0,0,0,.02);
+      --shadow:rgba(0,0,0,.10);
+      --easeOut:cubic-bezier(.2,.8,.2,1);
+    }
+
+    *{box-sizing:border-box}
+
+    @media (prefers-reduced-motion: reduce){
+      *, *::before, *::after{animation:none !important; transition:none !important; scroll-behavior:auto !important;}
+    }
+
+    @keyframes fadeUp{
+      from{opacity:0; transform:translateY(10px);}
+      to{opacity:1; transform:translateY(0);}
+    }
+
+    body{
+      margin:0;
+      font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display","Helvetica Neue",Arial,sans-serif;
+      color:var(--text);
+      background:#fff;
+    }
+
+    html, body{ height:100%; }
+
+    /* Scroll snapping between full-screen sections; topbar is pinned */
+    main{
+      height:100vh;
+      padding:0;
+      overflow-y:auto;
+      scroll-snap-type:y mandatory;
+      scroll-padding-top:var(--topPad);
+      scroll-behavior:smooth;
+      -webkit-overflow-scrolling:touch;
+    }
+
+    /* Hide scrollbar (optional, keeps it clean) */
+    main::-webkit-scrollbar{ width:0; height:0; }
+
+    /* Wider overall layout */
+    .shell{
+      width:100%;
+      margin:0;
+    }
+
+    h1{
+      margin:0;
+      font-size:clamp(26px,3vw,40px);
+      font-weight:760;
+      letter-spacing:-.03em;
+      color:var(--title);
+      text-align:center;
+      animation:fadeUp .6s var(--easeOut) both;
+      animation-delay:.04s;
+    }
+
+    .sub{
+      margin:0 0 2px;
+      font-size:13px;
+      color:var(--muted);
+      text-align:center;
+      max-width:760px;
+      line-height:1.35;
+      animation:fadeUp .6s var(--easeOut) both;
+      animation-delay:.08s;
+    }
+
+
+    /* Snap sections (Converter / Info) */
+    .snapSection{
+      scroll-snap-align:start;
+      scroll-snap-stop:always;
+      height:100vh;                 /* never show two sections at once */
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:flex-start;
+      padding:calc(var(--topPad) + 44px) 28px 28px; /* push content below pinned topbar */
+      gap:14px;
+    }
+
+    /* Info screen sits a bit higher than the converter screen */
+    #info{
+      padding-top:calc(var(--topPad) + 26px);
+    }
+
+    @media (max-width: 720px){
+      #info{ padding-top:calc(var(--topPad) + 18px); }
+    }
+
+    #converter.isOpen .scrollHint{ display:none; }
+    #converter.isOpen h1{ font-size:clamp(22px, 2.6vw, 34px); }
+    #converter.isOpen .sub{ font-size:12.5px; line-height:1.35; max-width:720px; }
+
+    .snapHeader{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:10px;
+      text-align:center;
+      max-width:980px;
+      animation:fadeUp .55s var(--easeOut) both;
+    }
+
+    .scrollHint{
+      margin-top:4px;
+      font-size:12px;
+      color:rgba(60,60,67,.55);
+      display:flex;
+      align-items:center;
+      gap:8px;
+      user-select:none;
+    }
+
+    .scrollDot{
+      width:6px;
+      height:6px;
+      border-radius:999px;
+      background:rgba(0,0,0,.22);
+      box-shadow:0 0 0 4px rgba(0,0,0,.06);
+      animation:bob 1.2s var(--easeOut) infinite;
+    }
+
+    @keyframes bob{
+      0%,100%{ transform:translateY(0); opacity:.65; }
+      50%{ transform:translateY(3px); opacity:1; }
+    }
+
+    /* BIG plateau */
+    .plate{
+      width:min(980px, 94vw);
+      min-height:200px;
+      margin-top:0;
+      padding:16px;
+      border-radius:26px;
+      border:1px solid var(--border);
+      background:rgba(0,0,0,.015);
+      box-shadow:0 26px 80px rgba(0,0,0,.10);
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+      animation:fadeUp .65s var(--easeOut) both;
+      animation-delay:.12s;
+      transition:transform .2s var(--easeOut), box-shadow .2s var(--easeOut);
+      justify-content:center;
+    }
+
+    .plate:hover{
+      transform:translateY(-2px);
+      box-shadow:0 30px 90px rgba(0,0,0,.12);
+    }
+
+    /* Drop zone feedback */
+    .drop{
+      border:1px dashed rgba(0,0,0,.20);
+      border-radius:20px;
+      padding:18px 16px;
+      text-align:center;
+      background:rgba(0,0,0,.012);
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      align-items:center;
+      justify-content:center;
+      min-height:132px;
+      transition:background .2s var(--easeOut), border-color .2s var(--easeOut), transform .2s var(--easeOut);
+    }
+    .drop.isDragOver{
+      background:rgba(0,0,0,.02);
+      border-color:rgba(0,0,0,.28);
+      transform:scale(1.01);
+    }
+
+    .fileLine{
+      font-size:12px;
+      color:var(--muted);
+      max-width:90%;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      white-space:nowrap;
+    }
+
+    /* Buttons */
+    .btn{
+      border:1px solid var(--border);
+      background:#fff;
+      border-radius:999px;
+      padding:9px 14px;
+      font-size:13px;
+      cursor:pointer;
+      transition:transform .12s var(--easeOut), opacity .15s var(--easeOut), background .2s var(--easeOut), border-color .2s var(--easeOut);
+      user-select:none;
+    }
+    .btn:hover{transform:translateY(-1px);}
+    .btn:active{transform:scale(.98);}
+
+    .btnPrimary{
+      background:#2C2C2E;
+      color:#fff;
+      border-color:#2C2C2E;
+      font-weight:650;
+    }
+
+    .btnDisabled{opacity:.5;pointer-events:none}
+
+    .divider{height:1px;background:rgba(0,0,0,.06); margin:2px 0}
+
+    /* Format section */
+    .formatBlock{
+      display:block;
+      overflow:hidden;
+      max-height:0;
+      opacity:0;
+      transform:translateY(-4px);
+      transition:max-height .28s var(--easeOut), opacity .22s var(--easeOut), transform .28s var(--easeOut);
+      will-change:max-height, opacity, transform;
+    }
+    .formatBlock.isOpen{
+      max-height:280px; /* enough for selects + button */
+      opacity:1;
+      transform:translateY(0);
+    }
+    .plate.isExpanded{ justify-content:flex-start; }
+
+    /* Closed state: only show the drop area (no reserved empty space) */
+    .plate:not(.isExpanded) .divider{ display:none; }
+    .plate:not(.isExpanded) .doneRow{ display:none; }
+    .centerStack{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      padding:6px 0 2px;
+    }
+
+    .label{
+      font-size:11px;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      color:rgba(60,60,67,.55);
+    }
+
+    select{
+      width:min(420px, 84vw);
+      padding:10px 12px;
+      border-radius:14px;
+      border:1px solid var(--border);
+      font-size:14px;
+      background:#fff;
+      outline:none;
+    }
+
+    .qualityWrap{
+      display:none;
+      align-items:center;
+      gap:10px;
+      flex-wrap:wrap;
+      justify-content:center;
+      margin-top:4px;
+    }
+
+    .qualityWrap .qSmall{
+      font-size:12px;
+      color:var(--muted);
+    }
+
+    .actions{
+      display:flex;
+      gap:10px;
+      justify-content:center;
+      margin-top:6px;
+    }
+
+    /* Result row */
+    @keyframes slideIn{
+      from{opacity:0; transform:translateY(8px);}
+      to{opacity:1; transform:translateY(0);}
+    }
+    .doneRow{
+      display:flex;
+      height:56px;
+      opacity:0;
+      pointer-events:none;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:12px 14px;
+      border-radius:18px;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.70);
+      backdrop-filter:saturate(1.4) blur(10px);
+      transition:opacity .2s var(--easeOut);
+    }
+    .doneRow.isVisible{
+      animation:slideIn .35s var(--easeOut) both;
+      opacity:1;
+      pointer-events:auto;
+    }
+
+    .doneMeta{
+      display:flex;
+      flex-direction:column;
+      gap:2px;
+      min-width:0;
+    }
+    .doneName{
+      font-size:13px;
+      font-weight:650;
+      color:var(--title);
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      max-width:560px;
+    }
+    .doneSize{
+      font-size:12px;
+      color:var(--muted);
+    }
+
+    /* Mobile tweaks */
+    @media (max-width: 720px){
+      :root{ --topPad:78px; }
+      main{ padding:0; }
+      .snapSection{ padding:calc(var(--topPad) + 30px) 16px 24px; }
+      .plate{padding:14px}
+      .doneName{max-width:240px}
+
+      /* Hide the topbar macOS CTA on mobile */
+      .topbarDownload{ display:none !important; }
+
+      /* Mobile typography */
+      h1{ font-size:clamp(22px, 7.2vw, 30px); }
+      .sub{ font-size:12.5px; max-width:92vw; }
+
+      /* Converter card spacing */
+      .plate{ border-radius:22px; box-shadow:0 18px 52px rgba(0,0,0,.10); }
+      .drop{ min-height:124px; }
+
+      /* Wider selects on mobile */
+      select{ width:min(520px, 92vw); }
+    }
+
+
+    .infoBtn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      padding:9px 14px;
+      border-radius:999px;
+      border:1px solid rgba(0,0,0,.12);
+      background:#fff;
+      color:rgba(44,44,46,.92);
+      text-decoration:none;
+      font-size:13px;
+      font-weight:650;
+      transition:transform .12s var(--easeOut), background .2s var(--easeOut), border-color .2s var(--easeOut);
+      user-select:none;
+    }
+
+    .infoBtn:hover{ transform:translateY(-1px); background:rgba(0,0,0,.02); border-color:rgba(0,0,0,.14); }
+    .infoBtn:active{ transform:scale(.98); }
+
+    .infoBtn .arrow{ opacity:.7; }
+
+
+    /* SEO content (kept minimal + on-brand) */
+    .seoBlock{
+      width:min(980px, 94vw);
+      margin-top:14px;
+      border-radius:22px;
+      border:1px solid rgba(0,0,0,.10);
+      background:#fff;
+      padding:14px 14px;
+      box-shadow:0 14px 44px rgba(0,0,0,.055);
+      animation:fadeUp .65s var(--easeOut) both;
+      animation-delay:.22s;
+    }
+
+    .seoBlock h2{
+      margin:0 0 8px;
+      font-size:16px;
+      letter-spacing:-.02em;
+      color:var(--title);
+      text-align:center;
+    }
+
+    .seoBlock p{
+      margin:0 0 10px;
+      font-size:13px;
+      line-height:1.55;
+      color:rgba(60,60,67,.78);
+    }
+
+    .seoLead{ text-align:center; }
+    .seoFoot{ text-align:center; }
+
+    .seoGrid{
+      display:grid;
+      grid-template-columns:repeat(2, minmax(0, 1fr));
+      gap:10px;
+      margin-top:10px;
+    }
+
+    .seoCard{
+      border:1px solid rgba(0,0,0,.10);
+      background:rgba(0,0,0,.012);
+      border-radius:18px;
+      padding:10px 12px;
+      min-height:120px;
+      display:flex;
+      flex-direction:column;
+    }
+
+    .seoCard h3{
+      margin:0 0 6px;
+      font-size:13px;
+      color:var(--title);
+      letter-spacing:-.01em;
+    }
+
+    .seoCard ul{
+      margin:0;
+      padding-left:16px;
+      font-size:12.5px;
+      color:rgba(60,60,67,.75);
+      line-height:1.45;
+    }
+
+    details{
+      border:1px solid rgba(0,0,0,.10);
+      border-radius:16px;
+      padding:10px 12px;
+      background:rgba(0,0,0,.012);
+    }
+
+    summary{
+      cursor:pointer;
+      font-size:13px;
+      font-weight:650;
+      color:var(--title);
+      list-style:none;
+      outline:none;
+    }
+
+    summary::-webkit-details-marker{ display:none; }
+
+    details p{ margin:8px 0 0; }
+
+    @media (max-width: 720px){
+      .seoGrid{ grid-template-columns:1fr; }
+      .seoBlock{ padding:16px; }
+      .infoBtn{ width:min(260px, 90vw); }
+    }
+
+    footer{
+      margin-top:auto;
+      border-top:1px solid rgba(0,0,0,.08);
+      padding:22px 0;
+      font-size:12px;
+      color: rgba(60,60,67,.55);
+      text-align:center;
+      background:#fff;
+    }
+  </style>
+</head>
+
+<body>
+  <script src="./topbar.js"></script>
+
+  <main id="snapMain">
+    <div class="shell">
+      <section class="snapSection" id="converter" aria-label="ZIP 4 converter">
+        <div class="snapHeader">
+          <h1>ZIP 4 file converter — convert, resize &amp; compress</h1>
+          <p class="sub">A fast, privacy-first online file converter for images and documents. Pick a file, choose an output format, then download the result.</p>
+          <div class="scrollHint" aria-hidden="true"><span class="scrollDot"></span>Scroll for info</div>
+        </div>
+
+      <div class="plate" id="plate">
+        <input type="file" id="fileInput" hidden accept="image/*,.heic,.heif,.tif,.tiff,application/pdf,*/*">
+
+        <div class="drop" id="dropZone">
+          <div class="fileLine" id="fileLabel">No file selected</div>
+          <button class="btn btnPrimary" id="pickBtn">Select file</button>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="formatBlock" id="formatBlock">
+          <div class="centerStack">
+            <div class="label">Output format</div>
+
+            <select id="formatSelect">
+              <option value="">Choose format</option>
+            </select>
+
+            <div class="qualityWrap" id="targetWrap" style="display:none; margin-top:4px;">
+              <span class="qSmall">Target size</span>
+              <select id="targetSize" style="width:220px; padding:10px 12px; border-radius:14px; border:1px solid rgba(0,0,0,.12); font-size:14px; background:#fff; outline:none; color:rgba(44,44,46,.92); -webkit-text-fill-color:rgba(44,44,46,.92);">
+                <option value="">No limit</option>
+              </select>
+            </div>
+
+            <div class="qualityWrap" id="resizeWrap" style="display:none; margin-top:4px;">
+              <span class="qSmall">Resize</span>
+              <select id="resizeMax" style="width:220px; padding:10px 12px; border-radius:14px; border:1px solid rgba(0,0,0,.12); font-size:14px; background:#fff; outline:none; color:rgba(44,44,46,.92); -webkit-text-fill-color:rgba(44,44,46,.92);">
+                <option value="">Original</option>
+                <option value="3840">3840 px</option>
+                <option value="2560">2560 px</option>
+                <option value="1920">1920 px</option>
+                <option value="1280">1280 px</option>
+              </select>
+            </div>
+
+            <div class="actions">
+              <button class="btn btnPrimary btnDisabled" id="convertBtn">Convert</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="doneRow" id="doneRow">
+          <div class="doneMeta">
+            <div class="doneName" id="doneName">Ready</div>
+            <div class="doneSize" id="doneSize">—</div>
+          </div>
+          <a class="btn btnPrimary" id="downloadBtn" href="#" download>Download</a>
+        </div>
+
+      </div>
+      </section>
+
+      <section class="snapSection" id="info" aria-label="ZIP 4 information">
+        <div class="snapHeader">
+          <h1 style="font-size:clamp(22px,2.4vw,34px); margin:0;">ZIP 4 info</h1>
+          <p class="sub">Quick notes about formats, privacy, and what ZIP 4 can do.</p>
+        </div>
+        <section class="seoBlock" aria-label="ZIP 4 online file converter information">
+        <h2>Online file converter for everyday formats</h2>
+        <p class="seoLead">Convert, resize, or compress files in your browser — then download instantly.</p>
+
+        <div class="seoGrid">
+          <div class="seoCard">
+            <h3>What you can do</h3>
+            <ul>
+              <li>Convert images and common files</li>
+              <li>Resize images to popular sizes</li>
+              <li>Compress to reduce file size</li>
+            </ul>
+          </div>
+
+          <div class="seoCard">
+            <h3>Common searches this solves</h3>
+            <ul>
+              <li>file converter online</li>
+              <li>JPG ↔ PNG / WEBP converter</li>
+              <li>compress image online</li>
+            </ul>
+          </div>
+        </div>
+
+        <div style="margin-top:10px; display:flex; flex-wrap:wrap; gap:10px; justify-content:center; align-items:center;">
+          <a class="infoBtn" href="./what-is-zip4.html">What is ZIP 4?<span class="arrow">→</span></a>
+          <a class="infoBtn" href="./privacy.html">Privacy<span class="arrow">→</span></a>
+        </div>
+
+        <p class="seoFoot" style="margin-top:10px; margin-bottom:0; font-size:11.5px; color:rgba(60,60,67,.55);">*HEIC/HEIF support depends on browser/device support.</p>
+        </section>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    ZIP 4 — Online file converter. Made to be simple.
+  </footer>
+
+  <script src="./zip4-core.js?v=2"></script>
+
+  <script>
+    const fileInput    = document.getElementById('fileInput');
+    const pickBtn      = document.getElementById('pickBtn');
+    const fileLabel    = document.getElementById('fileLabel');
+    const dropZone     = document.getElementById('dropZone');
+    const plate        = document.getElementById('plate');
+    const converterSection = document.getElementById('converter');
+
+    const formatBlock  = document.getElementById('formatBlock');
+    const formatSelect = document.getElementById('formatSelect');
+
+    const convertBtn   = document.getElementById('convertBtn');
+
+    const doneRow      = document.getElementById('doneRow');
+    const downloadBtn  = document.getElementById('downloadBtn');
+    const doneName     = document.getElementById('doneName');
+    const doneSize     = document.getElementById('doneSize');
+
+    const targetWrap   = document.getElementById('targetWrap');
+    const targetSize   = document.getElementById('targetSize');
+
+    const resizeWrap   = document.getElementById('resizeWrap');
+    const resizeMax    = document.getElementById('resizeMax');
+
+
+    // --- Scroll snap helpers (keeps Converter/Info perfectly aligned) ---
+    const snapMain = document.getElementById('snapMain');
+    const snapSections = Array.from(document.querySelectorAll('.snapSection'));
+    const snapPad = () => parseFloat(getComputedStyle(snapMain).paddingTop || '0') || 0;
+
+    let snapTimer = null;
+
+    function nearestSectionIndex(){
+      const pad = snapPad();
+      const y = snapMain.scrollTop;
+      let bestI = 0;
+      let bestD = Infinity;
+      for(let i=0;i<snapSections.length;i++){
+        const top = Math.max(0, snapSections[i].offsetTop - pad);
+        const d = Math.abs(top - y);
+        if(d < bestD){ bestD = d; bestI = i; }
+      }
+      return bestI;
+    }
+
+    function scrollToSection(i, behavior='smooth'){
+      const pad = snapPad();
+      const clamped = Math.max(0, Math.min(snapSections.length - 1, i));
+      const top = Math.max(0, snapSections[clamped].offsetTop - pad);
+      snapMain.scrollTo({ top, behavior });
+      return clamped;
+    }
+
+    function settleSnap(){
+      // Only nudge into place if we're clearly between sections.
+      const pad = snapPad();
+      const y = snapMain.scrollTop;
+      const i = nearestSectionIndex();
+      const targetTop = Math.max(0, snapSections[i].offsetTop - pad);
+      const dist = Math.abs(targetTop - y);
+
+      // If already close enough, do nothing.
+      if(dist < 28) return;
+
+      // Let the browser do the snap; we only assist after a pause.
+      snapMain.scrollTo({ top: targetTop, behavior: 'smooth' });
+    }
+
+    // Debounced settle after free scroll
+    snapMain.addEventListener('scroll', ()=>{
+      if(snapTimer) window.clearTimeout(snapTimer);
+      snapTimer = window.setTimeout(settleSnap, 220);
+    }, { passive:true });
+
+    // On load, ensure we start exactly on the first section
+    window.addEventListener('load', ()=>{
+      // Ensure we start exactly at the top of the first section
+      snapMain.scrollTo({ top: 0, behavior: 'auto' });
+    });
+
+
+    let currentFile = null;
+    formatBlock.classList.remove('isOpen');
+    doneRow.classList.remove('isVisible');
+    plate.classList.remove('isExpanded');
+    converterSection.classList.remove('isOpen');
+
+    function isLossyFormat(m){
+      return (m === 'image/jpeg' || m === 'image/webp' || m === 'image/avif');
+    }
+
+    function isImageInput(file){
+      if(!file) return false;
+      const t = (file.type || '').toLowerCase();
+      const n = (file.name || '').toLowerCase();
+      return t.startsWith('image/') || n.endsWith('.heic') || n.endsWith('.heif') || n.endsWith('.tif') || n.endsWith('.tiff');
+    }
+
+    function fmt(bytes){
+      if(bytes < 1024) return bytes + ' B';
+      if(bytes < 1024*1024) return Math.round(bytes/1024) + ' KB';
+      return (bytes/1024/1024).toFixed(1) + ' MB';
+    }
+
+    function resetResult(){
+      plate.classList.remove('isExpanded');
+      converterSection.classList.remove('isOpen');
+      formatBlock.classList.remove('isOpen');
+      doneRow.classList.remove('isVisible');
+
+      if(downloadBtn.dataset.url){
+        try{ URL.revokeObjectURL(downloadBtn.dataset.url); }catch{}
+        delete downloadBtn.dataset.url;
+      }
+      downloadBtn.href = '#';
+      doneName.textContent = 'Ready';
+      doneSize.textContent = '—';
+    }
+
+    function updateResizeUI(){
+      // Mostriamo resize solo se:
+      // - input è immagine
+      // - output scelto è un formato lossy (per evitare confusione su ZIP/SHA/etc.)
+      const out = formatSelect.value;
+      const show = isImageInput(currentFile) && isLossyFormat(out);
+      resizeWrap.style.display = show ? 'flex' : 'none';
+      if(!show) resizeMax.value = '';
+    }
+
+    function populateTargetPresets(){
+      const prev = targetSize.value || '';
+      const out = formatSelect.value;
+
+      const show = !!currentFile
+        && isLossyFormat(out)
+        && typeof Zip4Core?.getTargetOptionsForFile === 'function';
+
+      if(!show){
+        targetWrap.style.display = 'none';
+        targetSize.innerHTML = '<option value="">No limit</option>';
+        return;
+      }
+
+      const presets = Zip4Core.getTargetOptionsForFile(currentFile, out) || [];
+      if(!presets.length){
+        targetWrap.style.display = 'none';
+        targetSize.innerHTML = '<option value="">No limit</option>';
+        return;
+      }
+
+      targetWrap.style.display = 'flex';
+      targetSize.innerHTML = '<option value="">No limit</option>';
+
+      for(const p of presets){
+        const opt = document.createElement('option');
+        opt.value = p;
+        opt.textContent = p;
+        targetSize.appendChild(opt);
+      }
+
+      const stillOk = Array.from(targetSize.options).some(o => o.value === prev);
+      targetSize.value = stillOk ? prev : '';
+    }
+
+    async function populateOutputs(file){
+      const prev = formatSelect.value || '';
+
+      if(typeof Zip4Core?.getOutputsForFile !== 'function'){
+        // Core non caricato / errore: fallback minimale
+        formatSelect.innerHTML = '<option value="">Choose format</option>';
+        return;
+      }
+
+      const outs = await Zip4Core.getOutputsForFile(file);
+
+      formatSelect.innerHTML = '<option value="">Choose format</option>';
+
+      for(const o of outs){
+        const opt = document.createElement('option');
+        opt.value = o.value;
+        opt.textContent = o.label;
+
+        // Disabilita opzioni incompatibili, MA non disabilitare il valore già selezionato
+        if(o.enabled === false && o.value !== prev){
+          opt.disabled = true;
+        }
+
+        formatSelect.appendChild(opt);
+      }
+
+      const hasPrev = outs.some(x => x.value === prev);
+      if(hasPrev) formatSelect.value = prev;
+    }
+
+    function refreshConvertButton(){
+      const selectedOpt = formatSelect.selectedOptions && formatSelect.selectedOptions[0];
+      const canConvert = !!formatSelect.value && !(selectedOpt && selectedOpt.disabled);
+      convertBtn.classList.toggle('btnDisabled', !canConvert);
+    }
+
+    pickBtn.onclick = () => fileInput.click();
+
+    // Drag & drop
+    ;['dragenter','dragover'].forEach(evt=>{
+      dropZone.addEventListener(evt, (e)=>{
+        e.preventDefault();
+        e.stopPropagation();
+        dropZone.classList.add('isDragOver');
+      });
+    });
+    ;['dragleave','drop'].forEach(evt=>{
+      dropZone.addEventListener(evt, (e)=>{
+        e.preventDefault();
+        e.stopPropagation();
+        dropZone.classList.remove('isDragOver');
+      });
+    });
+    dropZone.addEventListener('drop', (e)=>{
+      const f = e.dataTransfer.files && e.dataTransfer.files[0];
+      if(f){
+        fileInput.files = e.dataTransfer.files;
+        handleFileSelected(f);
+      }
+    });
+
+    fileInput.onchange = () => {
+      const f = fileInput.files && fileInput.files[0];
+      if(f) handleFileSelected(f);
+    };
+
+    async function handleFileSelected(file){
+      currentFile = file;
+      fileLabel.textContent = file.name;
+      resetResult();
+
+      await populateOutputs(file);
+
+      plate.classList.add('isExpanded');
+      converterSection.classList.add('isOpen');
+      formatBlock.classList.add('isOpen');
+
+      // Aggiorna UI controlli in base alla selezione corrente
+      refreshConvertButton();
+      populateTargetPresets();
+      updateResizeUI();
+    }
+
+    formatSelect.onchange = () => {
+      refreshConvertButton();
+      populateTargetPresets();
+      updateResizeUI();
+    };
+
+    targetSize.onchange = () => {
+      // no-op: value read at conversion time
+    };
+
+    resizeMax.onchange = () => {
+      // no-op: value read at conversion time
+    };
+
+    convertBtn.onclick = async () => {
+      if(!currentFile) return;
+      const out = formatSelect.value;
+      if(!out) return;
+
+      const selectedOpt = formatSelect.selectedOptions && formatSelect.selectedOptions[0];
+      if(selectedOpt && selectedOpt.disabled){
+        alert('That format is not compatible with this file.');
+        return;
+      }
+
+      if(typeof Zip4Core?.convert !== 'function'){
+        alert('Core not loaded. Check zip4-core.js.');
+        return;
+      }
+
+      convertBtn.classList.add('btnDisabled');
+      convertBtn.textContent = 'Converting…';
+
+      try{
+        const preset = (isLossyFormat(out) && targetSize.value) ? targetSize.value : '';
+        const rMax = (isLossyFormat(out) && isImageInput(currentFile))
+          ? (Number(resizeMax.value || 0) || 0)
+          : 0;
+
+        const res = await Zip4Core.convert(
+          currentFile,
+          out,
+          {
+            ...(preset ? { target: preset } : {}),
+            ...(rMax > 0 ? { resizeMax: rMax } : {})
+          }
+        );
+
+        const url = URL.createObjectURL(res.blob);
+        downloadBtn.href = url;
+        downloadBtn.download = res.outName;
+        downloadBtn.dataset.url = url;
+
+        doneName.textContent = res.outName;
+        doneSize.textContent = fmt(res.blob.size);
+
+        requestAnimationFrame(()=> doneRow.classList.add('isVisible'));
+      }catch(err){
+        alert(err?.message || 'Conversion failed.');
+      }finally{
+        convertBtn.textContent = 'Convert';
+        refreshConvertButton();
+      }
+    };
+  </script>
+</body>
+</html>

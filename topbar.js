@@ -1,7 +1,6 @@
 (function () {
   "use strict";
 
-  // If you already have styles elsewhere, this is safe: it's namespaced to .zip4-topbar
   const STYLE_ID = "zip4-topbar-style";
   if (!document.getElementById(STYLE_ID)) {
     const style = document.createElement("style");
@@ -36,11 +35,12 @@
         box-shadow: var(--tb-shadow);
       }
 
+      /* GRID FOR PERFECT SYMMETRY */
       .zip4-topbar .tb-wrap{
         width: min(1180px, calc(100% - 36px));
         margin: 0 auto;
         display: grid;
-        grid-template-columns: 1fr auto 1fr;
+        grid-template-columns: 1fr auto 1fr; /* 1fr sides, auto center */
         align-items: center;
         gap: 12px;
       }
@@ -48,17 +48,7 @@
       .zip4-topbar .tb-left{
         display: flex;
         align-items: center;
-        gap: 12px;
-        min-width: 0;
-      }
-
-      .zip4-topbar .tb-brand{
-        font-weight: 600;
-        letter-spacing: 0.08em;
-        font-size: 12.5px;
-        color: var(--tb-text);
-        text-decoration: none;
-        white-space: nowrap;
+        justify-content: flex-start;
       }
 
       .zip4-topbar .tb-center{
@@ -68,22 +58,33 @@
         gap: 22px;
       }
 
+      .zip4-topbar .tb-right{
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+      }
+
+      /* TEXT & LINKS */
+      .zip4-topbar .tb-brand{
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        font-size: 12.5px;
+        color: var(--tb-text);
+        text-decoration: none;
+        white-space: nowrap;
+      }
+
       .zip4-topbar .tb-link{
         font-size: 13px;
         color: var(--tb-text-dim);
         text-decoration: none;
         padding: 6px 2px;
-        border-radius: 0;
-        background: transparent;
         position: relative;
-        transition: color .18s ease, opacity .18s ease;
+        transition: color .18s ease;
         user-select: none;
       }
 
-      .zip4-topbar .tb-link:hover{
-        color: var(--tb-text);
-      }
-
+      .zip4-topbar .tb-link:hover,
       .zip4-topbar .tb-link.is-active{
         color: var(--tb-text);
       }
@@ -91,9 +92,7 @@
       .zip4-topbar .tb-link::after{
         content: "";
         position: absolute;
-        left: 0;
-        right: 0;
-        bottom: -6px;
+        left: 0; right: 0; bottom: -6px;
         height: 2px;
         border-radius: 2px;
         background: rgba(255,255,255,0.0);
@@ -108,13 +107,7 @@
         background: rgba(255,255,255,0.70);
       }
 
-      .zip4-topbar .tb-right{
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
-        gap: 10px;
-      }
-
+      /* CTA BUTTON */
       .zip4-topbar .tb-cta{
         display: inline-flex;
         align-items: center;
@@ -143,33 +136,33 @@
         transform: translateY(0px);
       }
 
+      /* MOBILE MODE (Hide logo & download button) */
       @media (max-width: 720px){
         .zip4-topbar .tb-wrap{
-          grid-template-columns: auto 1fr auto;
+          grid-template-columns: 1fr; /* Single center column */
+          justify-content: center;
+        }
+        .zip4-topbar .tb-left,
+        .zip4-topbar .tb-right{
+          display: none;
         }
         .zip4-topbar .tb-center{
-          justify-content: center;
-          gap: 10px;
+          gap: 16px;
         }
-        .zip4-topbar .tb-link{ padding: 6px 2px; }
       }
     `;
     document.head.appendChild(style);
   }
 
-  // Build bar
   const bar = document.createElement("header");
   bar.className = "zip4-topbar";
 
-  // Detect current page for active state
   const path = (location.pathname.split("/").pop() || "index.html").toLowerCase();
   const isIndex = path === "" || path === "index.html";
-  const isDownload = path.includes("download");
   const isContact = path.includes("contact");
   const isPrivacy = path.includes("privacy");
+  const isDownload = path.includes("download");
 
-  // IMPORTANT: only ONE Download button on the right (as you requested)
-  // and make it clickable: point to download.html
   bar.innerHTML = `
     <div class="tb-wrap">
       <div class="tb-left">
